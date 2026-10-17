@@ -7,7 +7,24 @@ Repositorio de Horacio Pérez-Sánchez (`horacioeps`) para apps y proyectos rela
 - GitHub: https://github.com/horacioeps/Apps-SAMSUNG
 - Histórico: [HISTORICO.md](HISTORICO.md)
 
-## Uso
+## Televisión
 
-Este repo se acaba de crear. El contenido se irá añadiendo en siguientes sesiones.
+| Campo | Valor |
+|-------|--------|
+| Modelo | **Samsung QE43Q60AAU** (Q60A) |
+| Año | 2021 |
+| SO | Tizen |
+| Apps | HTML5 / CSS / JS (`.wgt`), no APK Android |
 
+Ficha completa: [docs/tv-qe43q60aau.md](docs/tv-qe43q60aau.md).
+
+## Apps
+
+| App | Descripción |
+|-----|-------------|
+| [apps/hola-tv/](apps/hola-tv/) | Scaffold Tizen mínimo para probar en la Q60A |
+
+## Notas
+
+- Sideload de desarrollo: suele borrarse al apagar la TV.
+- Instalación permanente: más restricciones (certificados / tienda).
