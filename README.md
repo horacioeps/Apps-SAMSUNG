@@ -24,7 +24,7 @@ Repositorio de Horacio Pérez-Sánchez (`horacioeps`) para apps y proyectos rela
 
 | App | Descripción |
 |-----|-------------|
-| [apps/bloqueo-mates/](apps/bloqueo-mates/) | **Primera app:** YouTube embebido + pausa mates cada 15 min |
+| [apps/bloqueo-mates/](apps/bloqueo-mates/) | **Primera app:** YouTube libre + mates (× 1 cifra) + PIN 0350 |
 | [apps/hola-tv/](apps/hola-tv/) | Scaffold Tizen mínimo de prueba |
 
 ## Notas rápidas

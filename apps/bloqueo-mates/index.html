@@ -3,32 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bloqueo Mates — YouTube</title>
+  <title>Bloqueo Mates — YouTube libre</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <main id="app" class="app">
-    <!-- YouTube a pantalla completa; el escudo captura el mando -->
-    <section id="view-watch" class="view-watch is-active" aria-label="YouTube con temporizador">
+    <!-- Búsqueda libre -->
+    <section id="view-search" class="view view-search is-active" data-view="search">
+      <header class="top">
+        <p class="brand">Bloqueo Mates</p>
+        <p class="sub">YouTube libre · mates cada 15 min · Amarillo = padres</p>
+      </header>
+      <p id="query" class="query" aria-live="polite">¿Qué quieres ver?</p>
+      <div id="keyboard" class="keyboard" aria-label="Teclado"></div>
+      <p id="search-status" class="status-line" aria-live="polite"></p>
+      <ul id="results" class="results" aria-label="Resultados"></ul>
+    </section>
+
+    <!-- Visionado -->
+    <section id="view-watch" class="view view-watch" data-view="watch" hidden>
       <div id="player" class="player"></div>
       <div id="focus-shield" class="focus-shield" tabindex="0" aria-hidden="true"></div>
       <div class="hud">
         <p class="brand">Bloqueo Mates · YouTube</p>
         <p id="countdown" class="countdown" aria-live="polite">15:00</p>
-        <p id="player-status" class="player-status">Cargando YouTube…</p>
-        <p class="hint">OK = play/pausa · Atrás no salta el reto</p>
+        <p id="player-status" class="status-line">…</p>
+        <p class="hint">OK play/pausa · Atrás = buscar · Amarillo = padres</p>
       </div>
     </section>
 
-    <section id="view-lock" class="view-lock" aria-label="Bloqueo mates" hidden>
-      <div class="lock-panel">
+    <!-- Bloqueo mates -->
+    <section id="view-lock" class="view view-lock" data-view="lock" hidden>
+      <div class="panel">
         <p class="brand">YouTube en pausa</p>
-        <h1 id="problem" class="problem">7 + 5 = ?</h1>
-        <p class="answer-label">Tu respuesta</p>
+        <h1 id="problem" class="problem">7 × 5 = ?</h1>
+        <p class="muted">Multiplicación de 1 cifra</p>
         <p id="answer" class="answer" aria-live="polite">_</p>
         <p id="feedback" class="feedback" aria-live="assertive"></p>
-        <p class="hint">Números del mando · OK enviar · Atrás borrar</p>
+        <p class="hint">Números · OK enviar · Atrás borrar</p>
       </div>
+    </section>
+
+    <!-- PIN padres -->
+    <section id="view-pin" class="view view-lock" data-view="pin" hidden>
+      <div class="panel">
+        <p class="brand">Zona padres</p>
+        <h1 class="problem">PIN</h1>
+        <p id="pin-dots" class="answer" aria-live="polite">····</p>
+        <p id="pin-feedback" class="feedback" aria-live="assertive"></p>
+        <p class="hint">0350 · Atrás cancelar</p>
+      </div>
+    </section>
+
+    <!-- Menú padres -->
+    <section id="view-parent" class="view view-search" data-view="parent" hidden>
+      <header class="top">
+        <p class="brand">Menú padres</p>
+        <p class="sub">PIN correcto · elige con flechas y OK</p>
+      </header>
+      <ul id="parent-menu" class="results parent-menu"></ul>
     </section>
   </main>
   <script src="js/config.js"></script>

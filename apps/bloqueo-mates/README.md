@@ -1,31 +1,28 @@
-# Bloqueo Mates (YouTube dentro)
+# Bloqueo Mates (YouTube libre)
 
-Modo tele para la Q60A: **YouTube embebido** + pausa cada 15 minutos con un problema de mates.
+YouTube **libre** (buscan lo que quieran) + cada 15 min una **multiplicación de 1 cifra** + menú padres con **PIN 0350**.
 
 No controla la app YouTube nativa del Smart Hub. Alcance: [docs/bloqueo-mates-alcance.md](../../docs/bloqueo-mates-alcance.md).
 
-## Configurar qué ven
+## Uso
 
-Edita `js/config.js`:
+| Quién | Qué hace |
+|-------|----------|
+| Niños | Teclado en pantalla → buscar → ver vídeo |
+| Cada 15 min | YouTube se pausa; hay que acertar `a × b` (1–9) |
+| Padres | Tecla **amarilla** del mando → PIN `0350` |
 
-```js
-videoId: "xxxxxxxxxxx",   // un vídeo
-playlistId: "PLxxxxxxx",  // o una lista (manda sobre videoId si no está vacío)
-sessionSeconds: 15 * 60,
-```
+Menú padres: volver, ir a buscar, saltar reto, salir de la app.
 
-## Uso en la TV
+## Config
 
-| Momento | Mando |
-|---------|--------|
-| Visionado | OK = play/pausa |
-| Bloqueo | 0–9 = dígitos, OK = enviar, Atrás = borrar |
+`js/config.js`:
 
-## Probar en el Mac
+- `parentPin`: `"0350"`
+- `sessionSeconds`: `15 * 60`
+- `youtubeApiKey`: opcional (si vacío, busca vía Piped)
+- `pipedInstances`: mirrors de búsqueda sin clave Google
 
-Abre `index.html` en el navegador (hace falta red).  
-Para un ciclo corto: `index.html?demo=1` (20 segundos).
+## Demo en el Mac
 
-## Empaquetar
-
-Privilegio `internet` + CSP para YouTube ya van en `config.xml`. Firmar `.wgt` con certificado Samsung y instalar (prueba: Developer Mode; permanente: Seller Office).
+Abre `index.html` (hace falta red). Ciclo corto: `index.html?demo=1`.

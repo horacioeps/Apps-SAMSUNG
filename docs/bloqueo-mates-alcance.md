@@ -1,40 +1,38 @@
 # Bloqueo Mates — alcance y límites
 
-Primera app del proyecto. Los niños consumen sobre todo **YouTube**.
+Primera app. Los niños consumen sobre todo **YouTube** y deben poder **ver lo que quieran** (sin lista fija).
 
-## Decisión de producto
+## Producto acordado
 
-**Modo tele = YouTube dentro de Bloqueo Mates**, no la app YouTube del Smart Hub.
+| Decisión | Valor |
+|----------|--------|
+| Contenido | YouTube libre **dentro** de Bloqueo Mates (búsqueda) |
+| Reto | Solo **multiplicaciones de 1 cifra** (1–9 × 1–9) |
+| Intervalo | 15 minutos |
+| Padres | PIN **0350** (tecla amarilla del mando) |
+| Lista fija | No |
 
-Así podemos pausar el vídeo, mostrar mates y reanudar. Si abren la YouTube nativa del menú, **esta app no los controla**.
+## Límites Tizen
 
-## Lo que Tizen permite y lo que no
+| Capacidad | ¿Sí? |
+|-----------|------|
+| Buscar y reproducir YouTube dentro de nuestra app | Sí |
+| Pausar ese visionado y pedir mates | Sí |
+| Cortar la app YouTube nativa del Smart Hub | **No** |
 
-| Capacidad | ¿En Q60A? |
-|-----------|-----------|
-| YouTube embebido (IFrame API) + timer + mates + mando | Sí, en nuestra app |
-| Pausar ese YouTube al llegar a 0:00 | Sí |
-| Overlay / corte sobre la app YouTube nativa | **No** |
-| Bloquear Netflix / TDT del sistema | **No** |
+Si abren el icono YouTube de Samsung, esta app no interviene.
 
-## Flujo actual (MVP)
+## Padres (PIN 0350)
 
-1. Abres **Bloqueo Mates** (no el icono YouTube de Samsung).
-2. Suena/reproduce YouTube a pantalla casi completa.
-3. Cada 15 minutos: pausa + problema de mates.
-4. Respuesta correcta con el mando → YouTube sigue otros 15 minutos.
-5. Lista o vídeo configurables en `apps/bloqueo-mates/js/config.js`.
-
-## Cómo “hacer que usen esta” y no la YouTube nativa
-
-- Poner Bloqueo Mates en favoritos / carpeta fácil del Smart Hub.
-- Opcional más adelante: PIN parental en la app; o restricciones del propio Samsung Kids / cuentas.
-- No hay API oficial para desactivar la YouTube del sistema desde nuestra app.
+- Volver al visionado / búsqueda
+- Ir a buscar
+- Saltar el reto actual (+15 min)
+- Salir de la aplicación
 
 ## Permanente
 
-Misma historia que el resto: sideload de desarrollo se borra al apagar; instalación fija vía Seller Office. Ver [instalacion-permanente.md](instalacion-permanente.md).
+Sideload de desarrollo se borra al apagar. Instalación fija: [instalacion-permanente.md](instalacion-permanente.md).
 
-## Estado en el repo
+## Código
 
-App: [`apps/bloqueo-mates/`](../apps/bloqueo-mates/) — YouTube embebido + timer + mates.
+[`apps/bloqueo-mates/`](../apps/bloqueo-mates/)
