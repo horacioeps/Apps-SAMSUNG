@@ -445,9 +445,7 @@
     if (!item) return;
     if (item.id === "resume") {
       if (returnMode === "lock") {
-        showView("watch");
-        startTimer();
-        playYoutube();
+        showView("lock");
       } else if (returnMode === "watch") {
         showView("watch");
         playYoutube();
