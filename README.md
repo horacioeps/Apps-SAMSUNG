@@ -24,11 +24,11 @@ Repositorio de Horacio Pérez-Sánchez (`horacioeps`) para apps y proyectos rela
 
 | App | Descripción |
 |-----|-------------|
-| [apps/bloqueo-mates/](apps/bloqueo-mates/) | **Primera app:** pausa cada 15 min + problema de mates (solo dentro de la app) |
+| [apps/bloqueo-mates/](apps/bloqueo-mates/) | **Primera app:** YouTube embebido + pausa mates cada 15 min |
 | [apps/hola-tv/](apps/hola-tv/) | Scaffold Tizen mínimo de prueba |
 
 ## Notas rápidas
 
 - Sideload Tizen Studio: se borra al apagar.
 - Permanente real: Samsung Apps TV Seller Office (certificación; Partner si España).
-- Bloqueo Mates **no** puede tapar Netflix/YouTube del sistema.
+- Bloqueo Mates embebe YouTube; **no** controla la app YouTube nativa del menú.

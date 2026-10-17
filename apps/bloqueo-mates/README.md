@@ -1,25 +1,31 @@
-# Bloqueo Mates
+# Bloqueo Mates (YouTube dentro)
 
-Primera app del repo. Temporizador de **15 minutos** → pantalla de **mates** → desbloqueo con el mando.
+Modo tele para la Q60A: **YouTube embebido** + pausa cada 15 minutos con un problema de mates.
 
-## Importante
+No controla la app YouTube nativa del Smart Hub. Alcance: [docs/bloqueo-mates-alcance.md](../../docs/bloqueo-mates-alcance.md).
 
-Esta app **solo controla su propia UI**. No puede tapar Netflix, YouTube ni la TDT del sistema. Detalle: [docs/bloqueo-mates-alcance.md](../../docs/bloqueo-mates-alcance.md).
+## Configurar qué ven
 
-Instalación permanente (no Tizen Studio): [docs/instalacion-permanente.md](../../docs/instalacion-permanente.md).
+Edita `js/config.js`:
 
-## Uso
+```js
+videoId: "xxxxxxxxxxx",   // un vídeo
+playlistId: "PLxxxxxxx",  // o una lista (manda sobre videoId si no está vacío)
+sessionSeconds: 15 * 60,
+```
 
-1. Al abrir: cuenta atrás 15:00.
-2. Al llegar a 0: bloqueo con suma/resta.
-3. Dígitos del mando + OK para enviar.
-4. Acierta → otros 15 minutos. Falla → nuevo problema.
-5. En visionado, OK reinicia el ciclo.
+## Uso en la TV
+
+| Momento | Mando |
+|---------|--------|
+| Visionado | OK = play/pausa |
+| Bloqueo | 0–9 = dígitos, OK = enviar, Atrás = borrar |
 
 ## Probar en el Mac
 
-Abre `index.html` en el navegador. Acorta el tiempo editando `SESSION_SECONDS` en `js/main.js` (p. ej. `20` para 20 segundos).
+Abre `index.html` en el navegador (hace falta red).  
+Para un ciclo corto: `index.html?demo=1` (20 segundos).
 
 ## Empaquetar
 
-Misma vía Tizen que `hola-tv`: certificado Samsung → `.wgt` → TV en Developer Mode (prueba) o Seller Office (permanente).
+Privilegio `internet` + CSP para YouTube ya van en `config.xml`. Firmar `.wgt` con certificado Samsung y instalar (prueba: Developer Mode; permanente: Seller Office).

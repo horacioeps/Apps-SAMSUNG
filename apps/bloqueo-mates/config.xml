@@ -2,15 +2,18 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:tizen="http://tizen.org/ns/widgets"
         id="http://horacioeps.local/bloqueo-mates"
-        version="0.1.0"
+        version="0.2.0"
         viewmodes="maximized">
   <tizen:application id="bloqueoMates.BloqueoMates" package="bloqueoMates" required_version="6.0"/>
   <content src="index.html"/>
   <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
   <name>Bloqueo Mates</name>
   <icon src="icon.png"/>
+  <access origin="*" subdomains="true"/>
   <tizen:profile name="tv-samsung"/>
+  <tizen:privilege name="http://tizen.org/privilege/internet"/>
   <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
   <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+  <tizen:content-security-policy>default-src 'self'; script-src 'self' https://www.youtube.com https://s.ytimg.com https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ytimg.com https://*.ytimg.com data:; media-src *; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src *</tizen:content-security-policy>
   <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
 </widget>

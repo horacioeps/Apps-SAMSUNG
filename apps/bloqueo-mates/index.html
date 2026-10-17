@@ -3,28 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bloqueo Mates</title>
+  <title>Bloqueo Mates — YouTube</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <main id="app" class="stage">
-    <section id="view-watch" class="view is-active" aria-label="Visionado">
-      <p class="brand">Bloqueo Mates</p>
-      <h1>Modo tele con pausas</h1>
-      <p class="lead">Cada 15 minutos, un problema de mates para seguir.</p>
-      <p id="countdown" class="countdown" aria-live="polite">15:00</p>
-      <p class="hint">OK del mando = reiniciar ciclo · 0–9 en el bloqueo</p>
+  <main id="app" class="app">
+    <!-- YouTube a pantalla completa; el escudo captura el mando -->
+    <section id="view-watch" class="view-watch is-active" aria-label="YouTube con temporizador">
+      <div id="player" class="player"></div>
+      <div id="focus-shield" class="focus-shield" tabindex="0" aria-hidden="true"></div>
+      <div class="hud">
+        <p class="brand">Bloqueo Mates · YouTube</p>
+        <p id="countdown" class="countdown" aria-live="polite">15:00</p>
+        <p id="player-status" class="player-status">Cargando YouTube…</p>
+        <p class="hint">OK = play/pausa · Atrás no salta el reto</p>
+      </div>
     </section>
 
-    <section id="view-lock" class="view" aria-label="Bloqueo" hidden>
-      <p class="brand">Pausa de mates</p>
-      <h1 id="problem" class="problem">7 + 5 = ?</h1>
-      <p class="answer-label">Tu respuesta</p>
-      <p id="answer" class="answer" aria-live="polite">_</p>
-      <p id="feedback" class="feedback" aria-live="assertive"></p>
-      <p class="hint">Números del mando · OK enviar · Atrás borrar</p>
+    <section id="view-lock" class="view-lock" aria-label="Bloqueo mates" hidden>
+      <div class="lock-panel">
+        <p class="brand">YouTube en pausa</p>
+        <h1 id="problem" class="problem">7 + 5 = ?</h1>
+        <p class="answer-label">Tu respuesta</p>
+        <p id="answer" class="answer" aria-live="polite">_</p>
+        <p id="feedback" class="feedback" aria-live="assertive"></p>
+        <p class="hint">Números del mando · OK enviar · Atrás borrar</p>
+      </div>
     </section>
   </main>
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

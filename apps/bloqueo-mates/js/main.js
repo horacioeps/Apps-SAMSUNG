@@ -1,34 +1,73 @@
 (function () {
-  var SESSION_SECONDS = 15 * 60;
+  var cfg = window.BloqueoMatesConfig || {};
+  var SESSION_SECONDS = cfg.sessionSeconds || 15 * 60;
   var MAX_ANSWER_LEN = 4;
+
+  // Demo rápido en navegador: index.html?demo=1 → 20 s
+  if (/[?&]demo=1\b/.test(location.search)) {
+    SESSION_SECONDS = 20;
+  }
 
   var viewWatch = document.getElementById("view-watch");
   var viewLock = document.getElementById("view-lock");
   var countdownEl = document.getElementById("countdown");
+  var statusEl = document.getElementById("player-status");
   var problemEl = document.getElementById("problem");
   var answerEl = document.getElementById("answer");
   var feedbackEl = document.getElementById("feedback");
+  var shield = document.getElementById("focus-shield");
 
   var mode = "watch"; // watch | lock
   var remaining = SESSION_SECONDS;
   var tickId = null;
   var expected = 0;
   var answer = "";
+  var player = null;
+  var playerReady = false;
 
   function pad(n) {
     return n < 10 ? "0" + n : String(n);
   }
 
   function formatTime(total) {
-    var m = Math.floor(total / 60);
-    var s = total % 60;
-    return pad(m) + ":" + pad(s);
+    return pad(Math.floor(total / 60)) + ":" + pad(total % 60);
+  }
+
+  function setStatus(text) {
+    if (statusEl) statusEl.textContent = text;
   }
 
   function setFeedback(text, kind) {
     feedbackEl.textContent = text || "";
     feedbackEl.classList.remove("is-bad", "is-good");
     if (kind) feedbackEl.classList.add(kind);
+  }
+
+  function pauseYoutube() {
+    try {
+      if (player && playerReady && player.pauseVideo) player.pauseVideo();
+    } catch (e) {}
+  }
+
+  function playYoutube() {
+    try {
+      if (player && playerReady && player.playVideo) player.playVideo();
+    } catch (e) {}
+  }
+
+  function toggleYoutube() {
+    if (!player || !playerReady || !player.getPlayerState) return;
+    try {
+      var state = player.getPlayerState();
+      // 1 = playing
+      if (state === 1) {
+        player.pauseVideo();
+        setStatus("YouTube en pausa");
+      } else {
+        player.playVideo();
+        setStatus("Reproduciendo YouTube");
+      }
+    } catch (e) {}
   }
 
   function showWatch() {
@@ -39,11 +78,13 @@
     viewWatch.classList.add("is-active");
     answer = "";
     setFeedback("");
+    if (shield) shield.focus();
+    playYoutube();
   }
 
   function showLock() {
     mode = "lock";
-    viewWatch.hidden = true;
+    pauseYoutube();
     viewWatch.classList.remove("is-active");
     viewLock.hidden = false;
     viewLock.classList.add("is-active");
@@ -63,22 +104,28 @@
     problemEl.textContent = a + " " + op + " " + b + " = ?";
     answer = "";
     answerEl.textContent = "_";
-    setFeedback("Resuelve para continuar");
+    setFeedback("Resuelve para seguir con YouTube");
   }
 
   function renderAnswer() {
     answerEl.textContent = answer.length ? answer : "_";
   }
 
+  function stopTimer() {
+    if (tickId) {
+      clearInterval(tickId);
+      tickId = null;
+    }
+  }
+
   function startTimer() {
     remaining = SESSION_SECONDS;
     countdownEl.textContent = formatTime(remaining);
-    if (tickId) clearInterval(tickId);
+    stopTimer();
     tickId = setInterval(function () {
       remaining -= 1;
       if (remaining <= 0) {
-        clearInterval(tickId);
-        tickId = null;
+        stopTimer();
         countdownEl.textContent = "00:00";
         showLock();
         return;
@@ -92,12 +139,12 @@
       setFeedback("Escribe un número", "is-bad");
       return;
     }
-    var value = parseInt(answer, 10);
-    if (value === expected) {
-      setFeedback("¡Bien! +15 minutos", "is-good");
+    if (parseInt(answer, 10) === expected) {
+      setFeedback("¡Bien! +15 minutos de YouTube", "is-good");
       setTimeout(function () {
         showWatch();
         startTimer();
+        setStatus("Reproduciendo YouTube");
       }, 900);
     } else {
       setFeedback("Incorrecto. Nuevo problema", "is-bad");
@@ -107,7 +154,6 @@
 
   function digitFromEvent(event) {
     if (event.key >= "0" && event.key <= "9") return event.key;
-    // Teclas numéricas del mando Samsung / Tizen suelen ir por keyCode 48–57 o 96–105
     var code = event.keyCode;
     if (code >= 48 && code <= 57) return String(code - 48);
     if (code >= 96 && code <= 105) return String(code - 96);
@@ -115,11 +161,7 @@
   }
 
   function isEnter(event) {
-    return (
-      event.key === "Enter" ||
-      event.keyCode === 13 ||
-      event.keyCode === 65385 // algunos mandos
-    );
+    return event.key === "Enter" || event.keyCode === 13 || event.keyCode === 65385;
   }
 
   function isBack(event) {
@@ -137,12 +179,16 @@
     if (mode === "watch") {
       if (isEnter(event)) {
         event.preventDefault();
-        startTimer();
+        toggleYoutube();
+      }
+      // En visionado, Atrás no cierra: evita saltar a la app YouTube nativa
+      if (isBack(event)) {
+        event.preventDefault();
+        setStatus("Usa esta app, no la YouTube del menú");
       }
       return;
     }
 
-    // mode === lock
     var digit = digitFromEvent(event);
     if (digit !== null) {
       event.preventDefault();
@@ -159,7 +205,6 @@
         answer = answer.slice(0, -1);
         renderAnswer();
       } else {
-        // En bloqueo, Atrás no sale de la app: evita saltarse el reto
         setFeedback("Hay que resolver el problema", "is-bad");
       }
       return;
@@ -171,7 +216,59 @@
     }
   });
 
+  function loadYoutubeApi() {
+    if (window.YT && window.YT.Player) {
+      createPlayer();
+      return;
+    }
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady = createPlayer;
+  }
+
+  function createPlayer() {
+    var opts = {
+      height: "100%",
+      width: "100%",
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        modestbranding: cfg.modestBranding ? 1 : 0,
+        rel: 0,
+        playsinline: 1,
+      },
+      events: {
+        onReady: function () {
+          playerReady = true;
+          setStatus("Reproduciendo YouTube");
+          if (shield) shield.focus();
+          startTimer();
+        },
+        onError: function () {
+          setStatus("Error al cargar YouTube — revisa videoId/playlistId en config.js");
+        },
+        onStateChange: function (event) {
+          // 0 ended → si hay playlist, YT sigue; si no, dejamos el timer
+          if (event.data === 0) setStatus("Vídeo terminado");
+        },
+      },
+    };
+
+    if (cfg.playlistId) {
+      opts.playerVars.listType = "playlist";
+      opts.playerVars.list = cfg.playlistId;
+    } else {
+      opts.videoId = cfg.videoId || "M7lc1UVf-VE";
+    }
+
+    player = new YT.Player("player", opts);
+  }
+
   // Arranque
-  showWatch();
-  startTimer();
+  countdownEl.textContent = formatTime(SESSION_SECONDS);
+  if (shield) shield.focus();
+  loadYoutubeApi();
 })();
