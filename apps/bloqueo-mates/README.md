@@ -26,3 +26,7 @@ Menú padres: volver, ir a buscar, saltar reto, salir de la app.
 ## Demo en el Mac
 
 Abre `index.html` (hace falta red). Ciclo corto: `index.html?demo=1`.
+
+## Instalar en la TV
+
+Paso a paso Mac + Q60A: [docs/como-instalar.md](../../docs/como-instalar.md).

@@ -11,3 +11,4 @@ Registro compacto de pedidos y acciones en este repositorio.
 | 2026-10-17 14:08 | Modo tele = YouTube (lo que más consumen) | YouTube embebido en Bloqueo Mates + pausa/mates | [2026-10-17-bloqueo-mates-youtube](sesiones/2026-10-17-bloqueo-mates-youtube.md) |
 | 2026-10-17 14:12 | Explicar mejor la pregunta del siguiente paso | Aclaradas opciones: lista fija vs PIN padres | [2026-10-17-explicar-pregunta-siguiente](sesiones/2026-10-17-explicar-pregunta-siguiente.md) |
 | 2026-10-17 14:15 | YouTube libre + PIN 0350; mates = × 1 cifra | Búsqueda libre, PIN padres, solo multiplicaciones 1–9 | [2026-10-17-bloqueo-mates-libre-pin](sesiones/2026-10-17-bloqueo-mates-libre-pin.md) |
+| 2026-10-17 14:21 | ¿Cómo lo instalamos? | Guía `docs/como-instalar.md` (Mac + Developer Mode + `.wgt`) | [2026-10-17-como-instalar](sesiones/2026-10-17-como-instalar.md) |

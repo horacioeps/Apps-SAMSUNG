@@ -17,6 +17,7 @@ Repositorio de Horacio Pérez-Sánchez (`horacioeps`) para apps y proyectos rela
 | Apps | HTML5 / CSS / JS (`.wgt`), no APK Android |
 
 - Ficha TV: [docs/tv-qe43q60aau.md](docs/tv-qe43q60aau.md)
+- **Cómo instalar (ahora):** [docs/como-instalar.md](docs/como-instalar.md)
 - Instalación permanente: [docs/instalacion-permanente.md](docs/instalacion-permanente.md)
 - Alcance 1ª app: [docs/bloqueo-mates-alcance.md](docs/bloqueo-mates-alcance.md)
 
