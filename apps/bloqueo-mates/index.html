@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloqueo Mates</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="app" class="stage">
+    <section id="view-watch" class="view is-active" aria-label="Visionado">
+      <p class="brand">Bloqueo Mates</p>
+      <h1>Modo tele con pausas</h1>
+      <p class="lead">Cada 15 minutos, un problema de mates para seguir.</p>
+      <p id="countdown" class="countdown" aria-live="polite">15:00</p>
+      <p class="hint">OK del mando = reiniciar ciclo · 0–9 en el bloqueo</p>
+    </section>
+
+    <section id="view-lock" class="view" aria-label="Bloqueo" hidden>
+      <p class="brand">Pausa de mates</p>
+      <h1 id="problem" class="problem">7 + 5 = ?</h1>
+      <p class="answer-label">Tu respuesta</p>
+      <p id="answer" class="answer" aria-live="polite">_</p>
+      <p id="feedback" class="feedback" aria-live="assertive"></p>
+      <p class="hint">Números del mando · OK enviar · Atrás borrar</p>
+    </section>
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>

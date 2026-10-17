@@ -25,9 +25,11 @@ Sí. Se pueden desarrollar e instalar aplicaciones web empaquetadas (`.wgt`) fir
 
 ### Limitación importante (sideload de desarrollo)
 
-Las apps instaladas vía Tizen Studio / CLI en modo desarrollador suelen **desinstalarse al apagar la TV** o al salir del entorno de desarrollo. Una instalación permanente implica más requisitos (certificados, políticas Samsung, o publicación).
+Las apps instaladas vía Tizen Studio / CLI en modo desarrollador **se desinstalan al apagar la TV** o al desconectar el entorno de desarrollo. Comportamiento intencional de Samsung.
 
-## Flujo desde el Mac (resumen)
+Para instalación que aguante el apagado: [instalacion-permanente.md](instalacion-permanente.md).
+
+## Flujo de prueba desde el Mac (no permanente)
 
 1. Instalar **Tizen Studio** + extensión Samsung TV.
 2. En la TV: Apps → ajustes de aplicaciones → marcar `12345` → activar **Developer Mode**.
@@ -37,4 +39,5 @@ Las apps instaladas vía Tizen Studio / CLI en modo desarrollador suelen **desin
 
 ## En este repo
 
-Scaffold de prueba: [`apps/hola-tv/`](../apps/hola-tv/).
+- Primera app: [`apps/bloqueo-mates/`](../apps/bloqueo-mates/) — [alcance](bloqueo-mates-alcance.md)
+- Scaffold de prueba: [`apps/hola-tv/`](../apps/hola-tv/)

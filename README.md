@@ -16,15 +16,19 @@ Repositorio de Horacio Pérez-Sánchez (`horacioeps`) para apps y proyectos rela
 | SO | Tizen |
 | Apps | HTML5 / CSS / JS (`.wgt`), no APK Android |
 
-Ficha completa: [docs/tv-qe43q60aau.md](docs/tv-qe43q60aau.md).
+- Ficha TV: [docs/tv-qe43q60aau.md](docs/tv-qe43q60aau.md)
+- Instalación permanente: [docs/instalacion-permanente.md](docs/instalacion-permanente.md)
+- Alcance 1ª app: [docs/bloqueo-mates-alcance.md](docs/bloqueo-mates-alcance.md)
 
 ## Apps
 
 | App | Descripción |
 |-----|-------------|
-| [apps/hola-tv/](apps/hola-tv/) | Scaffold Tizen mínimo para probar en la Q60A |
+| [apps/bloqueo-mates/](apps/bloqueo-mates/) | **Primera app:** pausa cada 15 min + problema de mates (solo dentro de la app) |
+| [apps/hola-tv/](apps/hola-tv/) | Scaffold Tizen mínimo de prueba |
 
-## Notas
+## Notas rápidas
 
-- Sideload de desarrollo: suele borrarse al apagar la TV.
-- Instalación permanente: más restricciones (certificados / tienda).
+- Sideload Tizen Studio: se borra al apagar.
+- Permanente real: Samsung Apps TV Seller Office (certificación; Partner si España).
+- Bloqueo Mates **no** puede tapar Netflix/YouTube del sistema.
